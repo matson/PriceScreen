@@ -73,6 +73,7 @@
 		3F4766492B91122A00328A3C /* invisalertUI */ = {
 			isa = PBXGroup;
 			children = (
+				3F4766682B91286C00328A3C /* Fonts */,
 				3F47664A2B91122A00328A3C /* AppDelegate.swift */,
 				3F47664C2B91122A00328A3C /* SceneDelegate.swift */,
 				3F47664E2B91122A00328A3C /* PriceViewController.swift */,
@@ -87,6 +88,13 @@
 				3F47665F2B91134400328A3C /* pattern-circles.svg */,
 			);
 			path = invisalertUI;
+			sourceTree = "<group>";
+		};
+		3F4766682B91286C00328A3C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BC88886DA19B5DBA308D40A7 /* Pods */ = {
