@@ -29,22 +29,24 @@ class PriceViewController: UIViewController {
     
     @IBOutlet weak var price: UILabel!
     
+    let pageViewsValues: [Float] = [10000, 50000, 100000, 500000, 1000000]
+   
+    let prices: [Float] = [8, 12, 16, 24, 36]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let minimumValue: Float = 10000
-        let maximumValue: Float = 1000000
-        let minimumSliderValue: Float = 0
-        let maximumSliderValue: Float = 4
-        
-        sliderUI.minimumValue = minimumSliderValue
-        sliderUI.maximumValue = maximumSliderValue
             
         bigLabel.text = Constants.mainLabel
         midLabel.text = Constants.midLabel1
         midLabel2.text = Constants.midLabel2
+        
+        
+        sliderUI.minimumValue = 0
+        sliderUI.maximumValue = Float(pageViewsValues.count - 1)
+        sliderUI.value = 0
         
        
         //setSlider()
@@ -57,35 +59,25 @@ class PriceViewController: UIViewController {
    
     //slider action
     @IBAction func slideAction(_ sender: UISlider) {
-        let value = Int(sender.value)
-        let formattedValue = formatValue(value)
-        pageViews.text = formattedValue + "PageViews"
-        let priceValue = calculatePrice(value)
-        price.text = String(priceValue)
+        let roundedValue = round(sender.value)
+            sender.value = roundedValue
+        
+        updateLabels()
 
+    }
+    
+    func updateLabels() {
+        let index = Int(sliderUI.value)
+        let selectedPageViews = pageViewsValues[index]
+        let selectedPrice = prices[index]
+        
+        pageViews.text = "\(Int(selectedPageViews)) pageviews"
+        price.text = "$\(Int(selectedPrice)) /month"
     }
    
     
     @IBAction func pressed(_ sender: UIButton) {
         
-    }
-    
-    //to calculate price:
-    func calculatePrice(_ value: Int) -> Int {
-        switch value {
-        case 10000:
-            return 8
-        case 50000:
-            return 12
-        case 100000:
-            return 16
-        case 500000:
-            return 24
-        case 1000000:
-            return 36
-        default:
-            return 0
-        }
     }
     
     func convert(svgFileName: String, withExtension: String) -> UIImage? {
