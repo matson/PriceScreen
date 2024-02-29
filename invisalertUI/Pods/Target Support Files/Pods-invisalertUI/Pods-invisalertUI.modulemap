@@ -1,0 +1,6 @@
+framework module Pods_invisalertUI {
+  umbrella header "Pods-invisalertUI-umbrella.h"
+
+  export *
+  module * { export * }
+}
