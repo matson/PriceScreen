@@ -18,6 +18,8 @@
 		3F4766642B91134400328A3C /* icon-check.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3F4766602B91134400328A3C /* icon-check.svg */; };
 		3F4766652B91134400328A3C /* icon-slider.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3F4766612B91134400328A3C /* icon-slider.svg */; };
 		3F4766672B91205000328A3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4766662B91205000328A3C /* Constants.swift */; };
+		3F47666B2B91583200328A3C /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F4766692B91566F00328A3C /* Manrope-Bold.ttf */; };
+		3F47666C2B91583600328A3C /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F47666A2B91566F00328A3C /* Manrope-ExtraBold.ttf */; };
 		EB940C5F68502C88F6267A73 /* Pods_invisalertUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51EB2EB9F6F05266D28B3A42 /* Pods_invisalertUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		3F4766602B91134400328A3C /* icon-check.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "icon-check.svg"; path = "../../images/icon-check.svg"; sourceTree = "<group>"; };
 		3F4766612B91134400328A3C /* icon-slider.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "icon-slider.svg"; path = "../../images/icon-slider.svg"; sourceTree = "<group>"; };
 		3F4766662B91205000328A3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3F4766692B91566F00328A3C /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		3F47666A2B91566F00328A3C /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
 		51EB2EB9F6F05266D28B3A42 /* Pods_invisalertUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_invisalertUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9498FA31F12BF60E0BC97573 /* Pods-invisalertUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-invisalertUI.release.xcconfig"; path = "Target Support Files/Pods-invisalertUI/Pods-invisalertUI.release.xcconfig"; sourceTree = "<group>"; };
 		C36E1C1B6A3A5A7CEB76DFE9 /* Pods-invisalertUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-invisalertUI.debug.xcconfig"; path = "Target Support Files/Pods-invisalertUI/Pods-invisalertUI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 		3F4766682B91286C00328A3C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				3F4766692B91566F00328A3C /* Manrope-Bold.ttf */,
+				3F47666A2B91566F00328A3C /* Manrope-ExtraBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -174,10 +180,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F47666C2B91583600328A3C /* Manrope-ExtraBold.ttf in Resources */,
 				3F4766642B91134400328A3C /* icon-check.svg in Resources */,
 				3F4766632B91134400328A3C /* pattern-circles.svg in Resources */,
 				3F4766622B91134400328A3C /* bg-pattern.svg in Resources */,
 				3F4766652B91134400328A3C /* icon-slider.svg in Resources */,
+				3F47666B2B91583200328A3C /* Manrope-Bold.ttf in Resources */,
 				3F4766572B91122B00328A3C /* LaunchScreen.storyboard in Resources */,
 				3F4766542B91122B00328A3C /* Assets.xcassets in Resources */,
 				3F4766522B91122A00328A3C /* Main.storyboard in Resources */,
