@@ -12,7 +12,7 @@ class PriceViewController: UIViewController {
 
     //To note: 
     //need to convert all images from SVG -> UIimages
-    //Include two stackViews to organize
+    //the cards would have been UIViews
     
     
     @IBOutlet weak var circleImage: UIImageView!
@@ -25,7 +25,7 @@ class PriceViewController: UIViewController {
     
     @IBOutlet weak var pageViews: UILabel!
     
-    @IBOutlet weak var sliderUI: UISlider!
+    @IBOutlet weak var sliderUI: CustomSlider!
     
     @IBOutlet weak var switchUI: UISwitch!
     
@@ -47,19 +47,22 @@ class PriceViewController: UIViewController {
     
     @IBOutlet weak var yearlyBill: UILabel!
     
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var button:UIButton!
+    
+    @IBOutlet weak var discountLabel: UILabel!
     
     @IBOutlet weak var month: UILabel!
     
-    let pageViewsValues: [Float] = [10000, 50000, 100000, 500000, 1000000]
+    let pageViewsValues: [Float] = [10000, 50000, 100000, 500000, 1000000] //to store the pageviews
    
-    let prices: [Float] = [8, 12, 16, 24, 36]
+    let prices: [Float] = [8, 12, 16, 24, 36] //to store the prices
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
   
+        //why these?
         sliderUI.minimumValue = 0
         sliderUI.maximumValue = Float(pageViewsValues.count - 1)
         sliderUI.value = 0
@@ -68,13 +71,15 @@ class PriceViewController: UIViewController {
        
         setSlider()
         
-        //setBackground()
+        setBackground()
         
         setCircle()
         
         updateLabels()
         
         setAttributes()
+        
+        setSwitch()
         
         
     }
@@ -83,19 +88,25 @@ class PriceViewController: UIViewController {
     @IBAction func slideAction(_ sender: UISlider) {
         let roundedValue = round(sender.value)
             sender.value = roundedValue
+        
         updateLabels()
+        
+        
 
     }
     
     //switch action
     @IBAction func switchAction(_ sender: UISwitch) {
         updateLabels()
+        
+        
     }
     
     @IBAction func pressed(_ sender: UIButton) {
         //action with button?
     }
     
+    //convert the given image files to UIImages:
     func convert(svgFileName: String, withExtension: String) -> UIImage? {
         if let svgURL = Bundle.main.url(forResource: svgFileName, withExtension: withExtension) {
             let svgData = try? Data(contentsOf: svgURL)
@@ -116,8 +127,10 @@ class PriceViewController: UIViewController {
                   selectedPrice *= 0.75 // Apply 25% discount
               }
               
-              self.pageViews.text = "\(Int(selectedPageViews)) PAGEVIEWS"
-              self.price.text = "$\(Int(selectedPrice))"
+            //call function to add the suffix
+            let formattedPageViews = self.formatPageViews(selectedPageViews)
+            self.pageViews.text = "\(formattedPageViews) PAGEVIEWS"
+            self.price.text = "$\(Int(selectedPrice))"
         }
     }
     
@@ -129,16 +142,20 @@ class PriceViewController: UIViewController {
         }
     }
     
+    //set the background image
     func setBackground(){
-        
-        //problem with having the pattern black
-//        if let svgUIImage = convert(svgFileName: "bg-pattern", withExtension: "svg") {
-//            let patternColor = UIColor(patternImage: svgUIImage)
-//            //view.backgroundColor = patternColor
-//        } else {
-//            // Handle the case where the SVG file couldn't be loaded or converted
-//        }
-        view.backgroundColor = Constants.Colors.backGroundBlue
+    
+        if let svgUIImage = convert(svgFileName: "bg-pattern", withExtension: "svg") {
+            let backgroundImageView = UIImageView(frame: view.bounds)
+            backgroundImageView.image = svgUIImage
+            backgroundImageView.contentMode = .topLeft
+            backgroundImageView.clipsToBounds = true
+            view.addSubview(backgroundImageView)
+            view.sendSubviewToBack(backgroundImageView)
+        } else {
+            // Handle the case where the SVG file couldn't be loaded or converted
+        }
+     
     }
     
     func formatValue(_ value: Int) -> String {
@@ -151,6 +168,23 @@ class PriceViewController: UIViewController {
         return formattedValue ?? ""
     }
     
+    //give the values the letter concatenation 
+    func formatPageViews(_ pageViews: Float) -> String {
+        if pageViews >= 1000 {
+            let suffixes = ["", "K", "M"]
+            var index = 0
+            var formattedPageViews = pageViews
+            while formattedPageViews >= 1000 {
+                formattedPageViews /= 1000
+                index += 1
+            }
+            return "\(Int(formattedPageViews))\(suffixes[index])"
+        } else {
+            return "\(Int(pageViews))"
+        }
+    }
+    
+    //give checks UIImage
     func setChecks(){
         if let checkUIImage = convert(svgFileName: "icon-check", withExtension: "svg") {
             check1.image = checkUIImage
@@ -161,27 +195,49 @@ class PriceViewController: UIViewController {
         }
     }
     
+    //slider
     func setSlider(){
-        // Soft Cyan (Full Slider Bar): hsl(174, 77%, 80%)
-        let softCyanColor = UIColor(hue: 174/360, saturation: 0.77, brightness: 0.8, alpha: 1.0)
-        sliderUI.minimumTrackTintColor = softCyanColor
+        
+        //height should be changed through a custom class
+        
+        let red: CGFloat = 200.0 / 255.0
+        let green: CGFloat = 219.0 / 255.0
+        let blue: CGFloat = 243.0 / 255.0
+        let alpha: CGFloat = 1.0
+        
+        let maxTrack = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        
+        sliderUI.minimumTrackTintColor = Constants.Colors.softCyanColor
+        sliderUI.maximumTrackTintColor = maxTrack
+        
+        //find specific background color
+        let redValue: CGFloat = 43.0 / 255.0
+        let greenValue: CGFloat = 202.0 / 255.0
+        let blueValue: CGFloat = 81.0 / 255.0
+        let alphaValue: CGFloat = 1.0
 
-        // Strong Cyan (Slider Background): hsl(174, 86%, 45%)
-        let strongCyanColor = UIColor(hue: 174/360, saturation: 0.86, brightness: 0.45, alpha: 1.0)
-        sliderUI.maximumTrackTintColor = strongCyanColor
+        let thumbColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: alphaValue)
+        
+        //sliderUI.thumbTintColor = thumbColor
+        // Add a glow effect to the thumb
+        sliderUI.layer.shadowColor = thumbColor.cgColor
+        sliderUI.layer.shadowRadius = 8.0
+        sliderUI.layer.shadowOpacity = 1.0
+        sliderUI.layer.shadowOffset = CGSize.zero
+        sliderUI.layer.masksToBounds = false
         
         //problem with the image parsing?
-//        if let sliderSVGImage = convert(svgFileName: "icon-slider", withExtension: "svg") {
-//            sliderUI.setThumbImage(sliderSVGImage , for: .normal)
-//        } else {
-//            // Handle the case where the SVG file couldn't be loaded or converted
-//        }
+        if let sliderSVGImage = convert(svgFileName: "icon-slider", withExtension: "svg") {
+            //sliderUI.setThumbImage(sliderSVGImage , for: .normal)
+        } else {
+            
+        }
         
     }
     
     func setAttributes(){
         
-        pageViews.font = UIFont(name: "Manrope-ExtraBold", size: 16)
+        pageViews.font = UIFont(name: "Manrope-Bold", size: 16)
         pageViews.textColor = Constants.Colors.lightGraytext
         price.font = UIFont(name: "Manrope-ExtraBold", size: 46)
         price.textColor = Constants.Colors.darkDesatBlue
@@ -191,10 +247,25 @@ class PriceViewController: UIViewController {
             .foregroundColor: Constants.Colors.lightGraytext
         ])
         
+        let redValue: CGFloat = 11.0 / 255.0
+        let greenValue: CGFloat = 11.0 / 255.0
+        let blueValue: CGFloat = 44.0 / 255.0
+        let alphaValue: CGFloat = 1.0
+
+        let buttonColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: alphaValue)
+        
+        let red: CGFloat = 156.0 / 255.0
+        let green: CGFloat = 187.0 / 255.0
+        let blue: CGFloat = 243.0 / 255.0
+        let alpha: CGFloat = 1.0
+
+        let buttonTextColor = UIColor(red: red, green: green, blue: blue, alpha: alphaValue)
+        
+        
         button.titleLabel?.font = UIFont(name: "Manrope-Bold", size: 12)
-        button.setTitleColor(Constants.Colors.lightGrayBlue, for: .normal)
-        button.backgroundColor = Constants.Colors.darkDesatBlue
-        button.layer.cornerRadius = 16
+        button.titleLabel?.textColor = buttonTextColor
+        button.backgroundColor = buttonColor
+        button.layer.cornerRadius = 20
         button.clipsToBounds = true
         
         
@@ -239,10 +310,39 @@ class PriceViewController: UIViewController {
             .foregroundColor: Constants.Colors.lightGraytext
         ])
         
+        //the -25% label
+        setDiscountLabel(label: discountLabel)
+        
     }
     
+    func setSwitch(){
+        
+        switchUI.onTintColor = Constants.Colors.lightGraytext
+        //switchUI.tintColor = Constants.Colors.darkDesatBlue
+        switchUI.transform = CGAffineTransform(scaleX: 0.65, y: 0.65) // Adjust the scale to make the circle smaller
+        //let newWidth: CGFloat = 500 // Set the desired width for the switch
+        //switchUI.bounds.size.width = newWidth
+    }
     
+    //customize the -25% label
+    func setDiscountLabel(label: UILabel){
+        
+        //find specific background color
+        let redValue: CGFloat = 234.0 / 255.0
+        let greenValue: CGFloat = 202.0 / 255.0
+        let blueValue: CGFloat = 195.0 / 255.0
+        let alphaValue: CGFloat = 1.0
 
-
+        let redBackgroundColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: alphaValue)
+        
+        //set rest of attributes here
+        label.textColor = Constants.Colors.discountTextRed
+        label.backgroundColor = redBackgroundColor
+        label.text = "-25%"
+        label.layer.cornerRadius = 10.0 // Adjust the value as per your design
+        label.layer.masksToBounds = true
+        label.font = UIFont(name: "Manrope-Bold", size: 12)
+        
+    }
 }
 
