@@ -59,13 +59,9 @@
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-sh-Ups">
                                 <rect key="frame" x="36" y="534" width="318" height="176"/>
-                                <color key="backgroundColor" red="0.61036545639999995" green="0.73356717169999996" blue="0.95436315829999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="176" id="zQd-PP-Cjf"/>
                                 </constraints>
-                                <connections>
-                                    <segue destination="uHK-le-49L" kind="embed" id="GQI-rv-tmZ"/>
-                                </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="tcz-n7-mQZ">
                                 <rect key="frame" x="122" y="557" width="170" height="130"/>
@@ -270,7 +266,6 @@
                     <connections>
                         <outlet property="bigLabel" destination="zyq-FY-jAK" id="NlN-dg-06T"/>
                         <outlet property="button" destination="YhD-an-ehc" id="DPx-nP-eCn"/>
-                        <outlet property="card1" destination="R0a-sh-Ups" id="JH8-mT-1vj"/>
                         <outlet property="check1" destination="IJV-hy-EhF" id="GYn-e7-SdW"/>
                         <outlet property="check2" destination="ywG-Ca-uN3" id="ukw-ia-Y6p"/>
                         <outlet property="check3" destination="ody-SF-qE6" id="KrL-5l-0VB"/>
@@ -293,20 +288,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="276.92307692307691" y="-65.402843601895725"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="F6g-ak-HQB">
-            <objects>
-                <viewController id="uHK-le-49L" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hvU-HM-SNj">
-                        <rect key="frame" x="0.0" y="0.0" width="318" height="176"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CmT-Sk-WZQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="262" y="374"/>
         </scene>
     </scenes>
     <resources>
